@@ -1,0 +1,67 @@
+{% extends '../base.html' %} {% block content %}
+
+<!--<p>{{users.owner}}</p>-->
+<div class="d-flex justify-content-center">
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">List Of Reataurant</h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table
+          class="table table-bordered"
+          id="dataTable"
+          width="100%"
+          cellspacing="0"
+        >
+          <thead>
+            <tr>
+              <th>Restaurant Name</th>
+              <th>Food Name</th>
+              <th>Price</th>
+              <th>Created At</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {%for food in foods%}
+            <tr>
+              <td>{{food.restaurant }}</td>
+              <td>{{food.name}}</td>
+              <td>{{food.price}}</td>
+              <td>{{food.created_at}}</td>
+
+              <td>
+                <button class="btn">
+                  <a
+                    class="text-decoration-none"
+                    href="{% url 'update_food' food.id %}"
+                    >Update</a
+                  >
+                </button>
+              </td>
+              <td>
+                <button class="btn">
+                  <a
+                    class="text-decoration-none"
+                    href="{% url 'delete_food' food.id %}"
+                    >Delete</a
+                  >
+                </button>
+              </td>
+            </tr>
+            {%endfor%}
+          </tbody>
+        </table>
+        <a
+          type="submit"
+          class="btn btn-success btn-user btn-block text-white text-center"
+          href="{% url 'home' %}"
+          >Go Back</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

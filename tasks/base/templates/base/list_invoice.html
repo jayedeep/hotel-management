@@ -1,0 +1,60 @@
+{% extends '../base.html' %} {% block content %}
+
+<!--<p>{{users.owner}}</p>-->
+<div class="d-flex justify-content-center">
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">List Of Reataurant</h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table
+          class="table table-bordered"
+          id="dataTable"
+          width="100%"
+          cellspacing="0"
+        >
+          <thead>
+            <tr>
+              <th>Restaurant Name</th>
+              <th>Food Name & QTY</th>
+              <th>Table No</th>
+              <th>Created At</th>
+              <th>Total Amount</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for inv in invoice %}
+            <tr>
+              <td>{{inv.restaurants}}</td>
+              <td>{% for qt in inv.foods %} {{qt}}, {% endfor %}</td>
+              <td>{{inv.table_no}}</td>
+              <td>{{inv.datetime}}</td>
+              <td>{{inv.totalbill}}</td>
+
+              <td>
+                <button class="btn">
+                  <a
+                    class="text-decoration-none"
+                    href="{% url 'generate_invoice' inv.id %}"
+                    >Download</a
+                  >
+                </button>
+              </td>
+            </tr>
+            {%endfor%}
+          </tbody>
+        </table>
+        <a
+          type="submit"
+          class="btn btn-success text-white text-center"
+          href="{% url 'home' %}"
+          >Go Back</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

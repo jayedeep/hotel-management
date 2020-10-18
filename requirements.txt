@@ -1,0 +1,14 @@
+asgiref==3.2.10
+Django==3.1.2
+django-collectionfield==0.0.4
+django-crispy-forms==1.9.2
+django-pg-utils==0.1.5
+img2pdf==0.4.0
+login==0.0.6
+lxml==4.5.2
+pikepdf==1.19.3
+Pillow==7.2.0
+psycopg2==2.8.6
+pytz==2020.1
+reportlab==3.5.53
+sqlparse==0.4.1

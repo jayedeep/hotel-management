@@ -1,0 +1,107 @@
+{% extends '../base.html' %} {% block content %} {% load crispy_forms_tags %}
+<body>
+  <div class="container bg-light">
+    <div class="d-sm-flex align-items-center justify-content-center mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Create Invoice For Customer</h1>
+    </div>
+    <div class="d-flex justify-content-center">
+      <!--     <form method="post">-->
+      <!--&lt;!&ndash;        {% csrf_token %}&ndash;&gt;-->
+      <!--&lt;!&ndash;         {{ form|crispy}}&ndash;&gt;-->
+      <!--         <button type="submit" class="btn btn-success">Create Food</button>-->
+      <!--  </form>-->
+      <form class="user" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <select name="restaurants" required>
+            {% for rest in restaurant %}
+            <option class="temp" value="{{ rest.id }}">{{ rest.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <select
+            onclick="myFunction()"
+            id="select-meal-type"
+            multiple="multiple"
+          >
+            {% for f in food %}
+            <option value="{{ f.name }} {{f.price }}">{{ f.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <input
+            type="text"
+            name="foods"
+            class="form-control form-control-user"
+            id="exampleInputFoods"
+            placeholder="Foods and Qty"
+            value=""
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            name="table_no"
+            class="form-control form-control-user"
+            id="exampleInputTable_no"
+            placeholder="Customer Table No."
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="datetime-local"
+            name="datetime"
+            class="form-control form-control-user"
+            id="exampleInputDatetime"
+            placeholder="Date & Time of create"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            name="totalbill"
+            class="form-control form-control-user"
+            id="exampleInputTotal"
+            placeholder="Total Bill"
+          />
+        </div>
+
+        <button class="btn btn-primary btn-user btn-block">
+          Create Invoice
+        </button>
+        <a
+          href="{% url 'home' %}"
+          class="btn btn-success btn-user btn-block text-white"
+        >
+          Go Back
+        </a>
+      </form>
+    </div>
+  </div>
+  <script>
+    var v = [];
+    var total = 0;
+    function myFunction() {
+      const selected = document.querySelectorAll(
+        "#select-meal-type option:checked"
+      );
+      const values = Array.from(selected).map((el) => el.value);
+      console.log("selected");
+      console.log(values[0]);
+      v.push(values[0]);
+      console.log(v);
+      document.querySelector("#exampleInputFoods").value = v;
+      for (var i = 0; i < v.length; i++) {
+        var str = v[i];
+        var matches = str.match(/(\d+)/);
+        total = Number(total) + Number(matches[0]);
+        console.log(total);
+      }
+      document.querySelector("#exampleInputTotal").value = total;
+    }
+  </script>
+</body>
+{% endblock %}
